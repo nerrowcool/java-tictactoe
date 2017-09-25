@@ -14,18 +14,21 @@ public class User {
 	
 	public static void Input() {
 		for (input = 0; input < 2; input++) {
-			System.out.println("User " + userID[Round % 2] + " please enter the " + xy[input ] + " position :");
+			System.out.println("User " + userID[Round % 2] + " please enter the " + xy[input ] + " coordinate :");
 			try {
 				pos[input] = scanner.nextInt();
-				if (Check.Range(pos[input])) {
-					System.out.println("Out of range!");
+				System.out.println(pos[input]);
+				if (!Check.Range(pos[input])) {
+					System.out.println("Out of Range!");
 					Input();
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("You are not inputing a number !");
+				System.out.println("You are not inputing a integer!");
 				break;
 			}
 		}
+	}
+	public static void Input_again() {
 		System.out.println("Do you want to input again? (Y/N)");
 		clear = scanner2.nextLine();
 		System.out.println(clear.toUpperCase().equals("Y"));

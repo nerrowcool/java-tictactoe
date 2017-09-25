@@ -30,20 +30,27 @@ public class GameField {
 	public static void main(String[] args) {
 		char[] sign = {'O', 'X'};
 		
-		while (!Check.end) {
+		while (!Check.win && User.Round < 10) {
 			Field();
 			
 			// user input
 			User.Input();
+			User.Input_again();
 			while (Check.Avalible(Draw[User.pos[1] - 1][User.pos[0] - 1]) == false) {
 				System.out.println("This postion is occupied!");
 				User.Input();
+				User.Input_again();
 			} 
 			Draw[User.pos[1] - 1][User.pos[0] - 1] = sign[User.Round % 2];
 			User.Round++;
 			Check.Win(Draw);
 		}
-		Field();
-		System.out.print("Player " + User.userID[(User.Round - 1) % 2] + " wins!");
+		if (Check.win == true) {
+			Field();
+			System.out.print("Player " + User.userID[(User.Round - 1) % 2] + " wins!");
+		} else {
+			Field();
+			System.out.println("Draw!");
+		}
 	}
 }
