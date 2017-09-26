@@ -12,10 +12,10 @@ public class Check {
 	}
 	
 	public static boolean Avalible(char A) {
-		if (A != ' ') {
-			return false;
-		} else {
+		if (A == ' ') {
 			return true;
+		} else {
+			return false;
 		}
 	}
 	

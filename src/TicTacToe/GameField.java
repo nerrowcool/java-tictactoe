@@ -27,30 +27,55 @@ public class GameField {
 		}
 		System.out.print("\r\n");
 	}
+	
 	public static void main(String[] args) {
 		char[] sign = {'O', 'X'};
 		
 		while (!Check.win && User.Round < 10) {
 			Field();
 			
-			// user input
-			User.Input();
-			User.Input_again();
-			while (Check.Avalible(Draw[User.pos[1] - 1][User.pos[0] - 1]) == false) {
-				System.out.println("This postion is occupied!");
+			Loop:
+			do {
 				User.Input();
-				User.Input_again();
-			} 
+				System.out.println("input = " + User.input);
+			
+				User.Input_out_of_range();
+				if (!User.range_c) {
+					continue Loop;
+				}
+					
+				User.Input_occupied(Draw);
+				if (!User.occ_c) {
+					continue Loop;
+				}
+			} while (!User.range_c || !User.occ_c);
+
+				
+/*			User.range_c = false;
+			do {
+				User.Input_out_of_range();
+			} while (!User.range_c);
+			
+			User.occ_c = false;
+			do {
+				User.Input_occupied(Draw);
+			} while (!User.occ_c);
+*/			
+			User.Input_again();
+			
 			Draw[User.pos[1] - 1][User.pos[0] - 1] = sign[User.Round % 2];
 			User.Round++;
 			Check.Win(Draw);
-		}
-		if (Check.win == true) {
-			Field();
-			System.out.print("Player " + User.userID[(User.Round - 1) % 2] + " wins!");
-		} else {
-			Field();
-			System.out.println("Draw!");
+//			}
+			if (Check.win ) {
+				Field();
+				System.out.print("Player " + User.userID[(User.Round - 1) % 2] + " wins!");
+			} else if (User.Round == 10){
+				Field();
+				System.out.println("Draw!");
+			} else {
+				System.out.println("Bug!!!!");
+			}
 		}
 	}
 }
