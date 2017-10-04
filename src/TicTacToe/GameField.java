@@ -4,11 +4,13 @@ import TicTacToe.User;
 import TicTacToe.Check;
 
 public class GameField {
-	public static char[][] Draw = {
-			{' ', ' ', ' '},
-			{' ', ' ', ' '},
-			{' ', ' ', ' '},
-		};
+
+public static char[][] Draw = {
+		{' ', ' ', ' '},
+		{' ', ' ', ' '},
+		{' ', ' ', ' '},
+	};
+	
 	public static void Field() {
 		int printField, printTop, printSide;
 		for (printField = 0; printField < 3; printField++) {
@@ -37,7 +39,6 @@ public class GameField {
 			Loop:
 			do {
 				User.Input();
-				System.out.println("input = " + User.input);
 			
 				User.Input_out_of_range();
 				if (!User.range_c) {
@@ -50,31 +51,17 @@ public class GameField {
 				}
 			} while (!User.range_c || !User.occ_c);
 
-				
-/*			User.range_c = false;
-			do {
-				User.Input_out_of_range();
-			} while (!User.range_c);
-			
-			User.occ_c = false;
-			do {
-				User.Input_occupied(Draw);
-			} while (!User.occ_c);
-*/			
 			User.Input_again();
 			
 			Draw[User.pos[1] - 1][User.pos[0] - 1] = sign[User.Round % 2];
 			User.Round++;
 			Check.Win(Draw);
-//			}
 			if (Check.win ) {
 				Field();
 				System.out.print("Player " + User.userID[(User.Round - 1) % 2] + " wins!");
 			} else if (User.Round == 10){
 				Field();
 				System.out.println("Draw!");
-			} else {
-				System.out.println("Bug!!!!");
 			}
 		}
 	}

@@ -15,19 +15,7 @@ public class User {
 	
 	public static void Input() {
 		for (input = 0; input < 2; input++) {
-//			System.out.println("input = " + input);
-			System.out.println("User " + userID[Round % 2] + " please enter the " + xy[input ] + " coordinate :");
-/*			do{
-				if (scanner.hasNextInt()) {
-					pos[input] = scanner.nextInt();
-					int_c = true;
-				} else {
-					System.out.println("Shit i contain a character!");
-					
-					int_c = false;
-				}
-			}while (!int_c);
-*/			try {
+			try {
 				raw_input = scanner.nextLine();
 				pos[input] = Integer.parseInt(raw_input);
 			} catch (NumberFormatException e) {
@@ -43,8 +31,6 @@ public class User {
 			System.out.println(input - 1);
 			System.out.println("Out of Range!");
 			range_c = false;
-//			input = 0;
-//			Input();
 		} else {
 			range_c = true;
 		}
@@ -55,8 +41,6 @@ public class User {
 		if (!Check.Avalible(D[pos[1] - 1][pos[0] - 1])) {
 			System.out.println("This postion is occupied!");
 			occ_c = false;
-//			input = 0;
-//			Input();
 		} else {
 			occ_c = true;
 		}
@@ -65,7 +49,6 @@ public class User {
 	public static void Input_again() {
 		System.out.println("Do you want to input again? (Y/N)");
 		clear = scanner2.nextLine();
-		//System.out.println(clear.toUpperCase().equals("Y"));
 		if (clear.toUpperCase().equals("Y")) {
 			Input();
 		}
