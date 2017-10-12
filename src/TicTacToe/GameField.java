@@ -34,7 +34,6 @@ public class GameField {
 	}
 	
 	public static void main(String[] args) {
-		boolean again_c;
 		char[] sign = {'O', 'X'};
 		Scanner scanner2 = new Scanner(System.in);
 		
@@ -43,7 +42,7 @@ public class GameField {
 			
 			Loop:
 				do {
-					again_c = true;
+					User.again_c = true;
 					
 					User.Input();
 				
@@ -57,16 +56,9 @@ public class GameField {
 						continue Loop;
 					}
 					
-					System.out.println("Do you want to input again? (Y/N)");
-					String clear = scanner2.nextLine();
+					User.Input_again();
 					
-					if (clear.toUpperCase().equals("Y")) {
-						again_c = true;
-					} else {
-						again_c = false;
-					}
-					
-				} while (again_c);
+				} while (User.again_c);
 
 			Draw[User.pos[1] - 1][User.pos[0] - 1] = sign[User.Round % 2];
 			User.Round++;
