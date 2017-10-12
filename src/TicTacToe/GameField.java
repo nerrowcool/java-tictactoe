@@ -40,20 +40,20 @@ public class GameField {
 		while (!condition.win && player.count < 9) {
 			tictactoe.Field();
 			
-			Loop:
 				do {
 					player.input_again = true;
 					
+					System.out.println("\n-----Round " + (player.count + 1) + "-----");
 					player.Input();
 				
 					condition.Input_out_of_range(player.pos[player.input - 1], player.pos[player.input - 2]);
 					if (!condition.range_c) {
-						continue Loop;
+						continue;
 					}
 						
 					condition.Input_occupied(tictactoe.Draw[player.pos[1] - 1][player.pos[0] - 1] );
 					if (!condition.occ_c) {
-						continue Loop;
+						continue;
 					}
 					
 					player.Input_again();

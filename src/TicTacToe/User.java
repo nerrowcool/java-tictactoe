@@ -8,17 +8,17 @@ class User {
 	int[] pos = {0, 0}, userID = {1, 2};
 	char[] xy = {'x', 'y'};
 	boolean input_again;
-	String raw_input, clear;
+	String clear;
 	Scanner scanner =new Scanner(System.in), scanner2 =new Scanner(System.in);
 	
 	void Input() {
 		for (input = 0; input < 2; input++) {
 			try {
 				System.out.println("Player " + userID[count % 2] + " please enter the " + xy[input] + " coordinate :");
-				raw_input = scanner.nextLine();
-				pos[input] = Integer.parseInt(raw_input);
+				pos[input] = Integer.parseInt(scanner.nextLine());
 			} catch (NumberFormatException e) {
-				System.out.println("You are not inputing a integer!");
+				System.out.println("*****Not intege*****");
+				System.out.println("\n-----Round " + (count + 1) + "-----");
 				input = -1;
 			}
 		}
