@@ -1,15 +1,18 @@
 package TicTacToe;
 
 import TicTacToe.User;
+
+import java.util.Scanner;
+
 import TicTacToe.Check;
 
 public class GameField {
 
-public static char[][] Draw = {
-		{' ', ' ', ' '},
-		{' ', ' ', ' '},
-		{' ', ' ', ' '},
-	};
+	public static char[][] Draw = {
+			{' ', ' ', ' '},
+			{' ', ' ', ' '},
+			{' ', ' ', ' '},
+		};
 	
 	public static void Field() {
 		int printField, printTop, printSide;
@@ -31,38 +34,52 @@ public static char[][] Draw = {
 	}
 	
 	public static void main(String[] args) {
+		boolean again_c;
 		char[] sign = {'O', 'X'};
+		Scanner scanner2 = new Scanner(System.in);
 		
-		while (!Check.win && User.Round < 10) {
+		while (!Check.win && User.Round < 9) {
 			Field();
 			
 			Loop:
-			do {
-				User.Input();
-			
-				User.Input_out_of_range();
-				if (!User.range_c) {
-					continue Loop;
-				}
+				do {
+					again_c = true;
 					
-				User.Input_occupied(Draw);
-				if (!User.occ_c) {
-					continue Loop;
-				}
-			} while (!User.range_c || !User.occ_c);
+					User.Input();
+				
+					User.Input_out_of_range();
+					if (!User.range_c) {
+						continue Loop;
+					}
+						
+					User.Input_occupied(Draw);
+					if (!User.occ_c) {
+						continue Loop;
+					}
+					
+					System.out.println("Do you want to input again? (Y/N)");
+					String clear = scanner2.nextLine();
+					
+					if (clear.toUpperCase().equals("Y")) {
+						again_c = true;
+					} else {
+						again_c = false;
+					}
+					
+				} while (again_c);
 
-			User.Input_again();
-			
 			Draw[User.pos[1] - 1][User.pos[0] - 1] = sign[User.Round % 2];
 			User.Round++;
+			
 			Check.Win(Draw);
-			if (Check.win ) {
+			if (Check.win) {
 				Field();
 				System.out.print("Player " + User.userID[(User.Round - 1) % 2] + " wins!");
-			} else if (User.Round == 10){
+			} else if (User.Round == 9) {
 				Field();
 				System.out.println("Draw!");
 			}
 		}
+		scanner2.close();
 	}
 }
